@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<html>
+  <head>
+
+  </head>
+  <body>
+
+    <h1>Hello, {{ user.username|default:'Guest' }}</h1>
+    {{ form|crispy }}
+    <p> Welcome to the Our site</p>
+    <div>
+      {% if user.is_staff %}
+          <a href="{% url 'logout' %}">Logout</a>
+          <a href="{% url 'product_list' %}">Продукты</a>
+      {% elif user.is_authenticated %}
+          <a href="{% url 'logout' %}">Logout</a>
+          <a href="{% url 'product_list' %}">Продукты</a>
+      {% else %}
+          <a href="{% url 'signup' %}">Sign Up</a>
+          <a href="{% url 'login' %}">Login</a>
+      {% endif %}
+  </div>
+
+  </body>
+</html>
+{% endblock %}
